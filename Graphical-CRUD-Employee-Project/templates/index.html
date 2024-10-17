@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Data</title>
+
+    <link rel="icon" href="/static/images/favicon-32x32.png" type="image/x-icon">
+
+
+    <!-- Bootstrap link -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        body{
+            /* background-image: url('/static/images/background1.jfif');     */
+          
+            background: linear-gradient(to right, #97c2be, #d0d3de); 
+            background-size: cover;          
+            background-position: center;     
+            height: 100vh;                   
+            margin: 0;                       
+            font-family: Arial, sans-serif; 
+        }
+        .header{
+           padding-top: 10px;
+            height: 70px;
+            background: linear-gradient(to right, #000720, #218e83); 
+            color: aliceblue;
+
+        }
+        hr{
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1 class="text-center header">Employee Application</h1>
+        <hr>
+
+        <div class="row">
+            <div class="col-sm-1">
+                
+            </div>
+
+            <div class="col-sm-12">
+                <!-- Flex container for Employee List and buttons -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="left">
+                        <h2>Employee List</h2>
+                    </div>
+                    <div class="right">
+
+                        <a href="/add_employee" type="button" class="btn btn-success">Add Employee</a>
+                        
+                        <a href="{{ url_for('graph_page') }}" type="button" class="btn btn-dark">View Charts</a>
+                        <a href="{{ url_for('upload_file') }}" type="button" class="btn btn-dark">Upload File</a>
+
+                    </div>
+                </div>
+                
+                <!-- Table placed outside the flex container to appear below the buttons -->
+                <table class="table table-hover mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">Emp ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Department</th>
+                            <th scope="col">Designation</th>
+                            <th scope="col">Salary</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Gender</th>
+                            <th scope="col">Experience Year</th>
+                            <th scope="col">Education</th>
+                            <th scope="col">Work Hours</th>
+                            <th scope="col">Bonus</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for emp in employee %}  
+                        <tr>
+                            <td>{{ emp[0] }}</td>  
+                            <td>{{ emp[1] }}</td>  
+                            <td>{{ emp[2] }}</td>  
+                            <td>{{ emp[3] }}</td>  
+                            <td>{{ emp[4] }}</td>  
+                            <td>{{ emp[5] }}</td>  
+                            <td>{{ emp[6] }}</td>  
+                            <td>{{ emp[7] }}</td>  
+                            <td>{{ emp[8] }}</td>  
+                            <td>{{ emp[9] }}</td> 
+                            <td>{{ emp[10] }}</td> 
+
+                            <td>
+                                <!-- <a href="/add_employee" type="button" class="btn btn-success">Add Employee</a> -->
+
+                                <a href="/edit_employee/{{ emp[0] }}"  class="btn btn-warning btn-sm" >Edit</a>
+                                <a href="/delete_employee/{{ emp[0] }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</a>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            
+            <div class="col-sm-1">
+                    
+            </div>
+        </div>
+      </div>
+
+    <!-- JS link -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+</body>
+</html>
